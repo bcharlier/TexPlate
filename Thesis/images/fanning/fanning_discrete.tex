@@ -1,0 +1,95 @@
+\begin{tikzpicture}[
+    tangent/.style={
+        decoration={
+            markings,% switch on markings
+            mark=
+                at position #1
+                with
+                {
+                    \coordinate (tangent point-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,0pt);
+                    \coordinate (tangent unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (1,0pt);
+                    \coordinate (tangent orthogonal unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,1);
+                }
+        },
+        postaction=decorate
+    },
+    use tangent/.style={
+        shift=(tangent point-#1),
+        x=(tangent unit vector-#1),
+        y=(tangent orthogonal unit vector-#1)
+    },
+    use tangent/.default=1
+]
+
+\begin{scope}
+% Define parameters
+    \def\L{5} % Length of the horizontal line
+    \def\H{3.5} % Height of the perpendicular line
+
+% Define coordinates
+    \coordinate (O) at (0,0);          % Origin (start of horizontal line)
+    \coordinate (H_end) at (\L,0);     % Right end of the horizontal line
+    \coordinate (V_top) at (\L,\H);    % Top end of the perpendicular line
+
+
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=5/8, inner sep=0pt] (Final_up) {} (V_top) ; \draw[opacity=0] (O) to[bend left=10]  node[pos=0.5, inner sep=0pt] (Midd_up) {}(Final_up);
+\draw[opacity=0] (H_end) to[bend right=15, tangent=0] node[pos=3/8, inner sep=0pt] (Final_low) {} (V_top) ; \draw[opacity=0] (O) to[bend left=10] node[pos=0.5, inner sep=0pt] (Midd_low) {} (Final_low);
+
+
+
+\fill[] (Final_up) circle (1pt) node[above, font=\small] {$\tilde \gamma^\eps_{k+1}$};
+\fill[] (Final_low) circle (1pt) node[below] {$\tilde \gamma_{k+1}$};
+
+\draw[gray, densely dashed] (Final_low) -- (Final_up);
+\draw[astral, very thick,->] (Final_low) -- node[pos=0.75, right, black, font=\small] {$\tilde w_{k+1}%\approx \eps\Jac^w_{\gamma(t_k)}(h)
+$} ($ (Final_low)!0.75!(Final_up) $);
+
+\draw[thick, gray, densely dashed, ->] (O) -- (Midd_up);
+\draw[very thick, densely dashed, ->] (O) node[below, black] {$\tilde \gamma_k$} -- (Midd_low);
+\draw[green!50!black, very thick,->] (O) -- ($ (O)!0.25!(Midd_low) $);
+
+
+\draw[thick, gray, densely dashed, ->] (Midd_up) -- (Final_up);
+\draw[very thick, densely dashed, ->] (Midd_low) -- (Final_low);
+
+ \draw [astral, very thick, use tangent, ->] (0,0) -- node[pos=0.8, above right, black] {$\tilde w_k$} (0,1);
+
+ \fill[] (O) circle (1pt);
+\fill[] (Midd_up) circle (1pt);
+\fill[] (Midd_low) circle (1pt);
+\end{scope}
+
+\begin{scope}[shift = {(Final_low)}, rotate = -20]
+% Define parameters
+    \def\L{4.5} % Length of the horizontal line
+    \def\H{3.5} % Height of the perpendicular line
+
+% Define coordinates
+    \coordinate (O) at (0,0);          % Origin (start of horizontal line)
+    \coordinate (H_end) at (\L,0);     % Right end of the horizontal line
+    \coordinate (V_top) at (\L,\H);    % Top end of the perpendicular line
+
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=5/8, inner sep=0pt] (Final_up) {} (V_top) ; \draw[opacity=0] (O) to[bend left=10]  node[pos=0.5, inner sep=0pt] (Midd_up) {}(Final_up);
+\draw[opacity=0] (H_end) to[bend right=15, tangent=0] node[pos=3/8, inner sep=0pt] (Final_low) {} (V_top) ; \draw[opacity=0] (O) to[bend left=10] node[pos=0.5, inner sep=0pt] (Midd_low) {} (Final_low);
+
+
+\fill[] (Final_up) circle (1pt) node[above, font=\small] {$\tilde \gamma^\eps_{k+2}$};
+\fill[] (Final_low) circle (1pt) node[below] {$\tilde \gamma_{k+2}$};
+
+\draw[gray, densely dashed] (Final_low) -- (Final_up);
+\draw[astral, very thick,->] (Final_low) -- node[pos=0.5, right, black, font=\small] {$\tilde w_{k+2}%\approx \eps\Jac^w_{\gamma(t_{k+1})}(h)
+$} ($ (Final_low)!0.75!(Final_up) $);
+
+\draw[thick, gray, densely dashed, ->] (O) -- (Midd_up);
+\draw[very thick, densely dashed, ->] (O) node[below, font=\small, black] {} -- (Midd_low);
+\draw[green!50!black, very thick,->] (O) -- ($ (O)!0.25!(Midd_low) $);
+
+
+\draw[thick, gray, densely dashed, ->] (Midd_up) -- (Final_up);
+\draw[very thick, densely dashed, ->] (Midd_low) -- (Final_low);
+
+ \fill[] (O) circle (1pt);
+\fill[] (Midd_up) circle (1pt);
+\fill[] (Midd_low) circle (1pt);
+\end{scope}
+\end{tikzpicture}

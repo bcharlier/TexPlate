@@ -1,0 +1,66 @@
+
+\begin{tikzpicture}[
+    tangent/.style={
+        decoration={
+            markings,% switch on markings
+            mark=
+                at position #1
+                with
+                {
+                    \coordinate (tangent point-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,0pt);
+                    \coordinate (tangent unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (1,0pt);
+                    \coordinate (tangent orthogonal unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,1);
+                }
+        },
+        postaction=decorate
+    },
+    use tangent/.style={
+        shift=(tangent point-#1),
+        x=(tangent unit vector-#1),
+        y=(tangent orthogonal unit vector-#1)
+    },
+    use tangent/.default=1
+]
+
+    % Define parameters
+    \def\L{6} % Length of the horizontal line
+    \def\H{3.5} % Height of the perpendicular line
+    \def\Li{6.4} % Initial velocity
+    \def\numFanLines{8} % Number of divisions for the fan lines on the perpendicular line
+
+    % Define coordinates
+    \coordinate (O) at (0,0);          % Origin (start of horizontal line)
+    \coordinate (H_end) at (\L,0);     % Right end of the horizontal line
+    \coordinate (V_top) at (\L,\H);    % Top end of the perpendicular line
+
+    \coordinate (_H_end) at (\Li,0);     % Right end of the horizontal line
+    \coordinate (_V_top) at (\Li,\H);    % Top end of the perpendicular line
+
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=0/8, inner sep=0pt] (Midd) {} (V_top) ; \draw[gray, densely dashed] (O) to[bend left=10] (Midd);
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=1/8, inner sep=0pt] (Midd) {} (V_top) ; \draw[gray, densely dashed] (O) to[bend left=10] (Midd);
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=2/8, inner sep=0pt] (Midd) {} (V_top) ; \draw[gray, densely dashed] (O) to[bend left=10] (Midd);
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=3/8, inner sep=0pt] (Midd) {} (V_top) ; \draw[gray, densely dashed] (O) to[bend left=10] (Midd);
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=4/8] (End_point) {} (V_top) ; 
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=5/8, inner sep=0pt] (Midd) {} (V_top) ; \draw[gray, densely dashed] (O) to[bend left=10] (Midd);
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=6/8, inner sep=0pt] (Midd) {} (V_top) ; \draw[gray, densely dashed] (O) to[bend left=10] (Midd);
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=7/8, inner sep=0pt] (Midd) {} (V_top) ; \draw[gray, densely dashed] (O) to[bend left=10] (Midd);
+\draw[opacity=0] (H_end) to[bend right=15] node[pos=8/8, inner sep=0pt] (Midd) {} (V_top) ; \draw[gray, densely dashed] (O) to[bend left=10] (Midd);
+
+
+    % 2. Draw the perpendicular line with a stronger bend
+    \draw[ultra thick, color=green!50!black, densely dashed, tangent=.5] (H_end) to[bend right=15]  (V_top) ;
+    \draw [astral, very thick, use tangent, ->]  (0,0) node[below right, black] {$\gamma(t)$} -- node[pos=0.8, black, right, font=\small] {$\frac{\Jac_{\gamma(0)}^w(t)}{t}$} (1,0);
+
+    % 1. Draw the horizontal line with a stronger bend
+    \draw[opacity=0] (_H_end) to[bend right=15] node[pos=0.512, inner sep=0pt] (Midd) {} (_V_top) ;
+    \draw[very thick, black, tangent=0] (O) to[bend left=10] (End_point) to[] (Midd);
+
+    \draw [astral, very thick, use tangent, ->] (0,0) -- node[pos=0.9, above right, black, font=\small] {$w$} (0,1);
+    \draw [green!50!black, very thick, use tangent, ->] (0,0) -- node[pos=0.9, below right, font=\small] {} (1,0);
+    
+
+    % Mark the origin (optional)
+    \fill (O) circle (1pt) node[below] {$\gamma(0)$};
+    \fill (End_point) circle (1pt);
+\end{tikzpicture}
+

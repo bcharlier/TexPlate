@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{A first chapter Unnumbered}
+\chaptermark*{Chapter Unnumbered} % short name 
+\addcontentsline{toc}{chapter}{Chapter Unnumbered (for a foreword...)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{figure}[ht]
+    \centering
+    \input{./images/fanning/fanning.tex}
+    \caption*{Example of picture \cite{Xelto96}}
+\end{figure}
+
+\section*{Foreword on Citations: Cite Others and Highlight Yours!}
+
+Citations are \emph{important}. There are standard citations using \verb|\cite| like \cite{Xelto96,Drava65} or \cite{Jorvik69}, and there are \emph{your contributions}, highlighted using \verb|\refcite| like this: \refcite{paperOne,paperTwo}, \refcite{paperThree}, or even \refcite{ProcOne,ProcThree}. It also works for section titles, like Software \refcite{softOne} and \refcite{softOne,softTwo}!
+
+There is a subtlety to be aware of:
+\begin{minted}[spacecolor=True]{tex}
+\refcite{ProcOne,ProcThree}   % WORKS!
+\refcite{ProcOne, ProcThree}  % FAILS: an extra space breaks cref...
+\end{minted}
+
+\section*{Style}
+
+\emph{Emphasis} is not the same as \textbf{bold} \dots \lipsum[2]
+
+
+\begin{listing}
+\begin{minted}[bgcolor=astral!4,fontsize=\small,mathescape,tabsize=4,escapeinside=||]{python3}
+from |\bfseries{\color{orange}{pykeops.torch}}| import |\bfseries{\color{orange}{LazyTensor}}|
+
+def gaussian_kernel(x, y, sigma2):
+    x_i = |\bfseries{\color{orange}{LazyTensor(}}|x[:, None, :]|\bfseries{\color{orange}{)}}|     # ([M, 1], D)
+    y_j = |\bfseries{\color{orange}{LazyTensor(}}|y[None, :, :]|\bfseries{\color{orange}{)}}|     # ([1, N], D)
+    D_ij = ((x_i - y_j) ** 2).sum(-1)  # ([M, N], 1) SymbolicTensor (squared distances)
+    return (-D_ij / sigma2).exp()      # ([M, N], 1) SymbolicTensor (Gaussian kernel)
+
+x = torch.randn(M, D)                 # (M, D) torch tensor
+y = torch.randn(N, D)                 # (N, D) torch tensor
+p = torch.randn(N, D)                 # (N, D) torch tensor
+
+K_ij = gaussian_kernel(x, y)         # ([M, N]) SymbolicTensor (Gaussian kernel)
+v = K_ij @ p                          # MatMul: ([M, N], 1) @ (N, D) = (M, D) torch tensor
+\end{minted}
+\caption{Code chunk inside a listing.}
+\label{lst_gaussian_kernel}
+\end{listing}
+
+
+
+\subsection*{Reference to Parts}
+
+\paragraph{Chapter \ref{chap:one}} \lipsum[1]
+
+\paragraph{Chapter \ref{chap:two}} \lipsum[2]
+

@@ -1,0 +1,75 @@
+\documentclass[]{book}
+
+\input{headers.tex}
+
+\newcommand{\titleen}{Nam dui ligula, fringilla a, euismod sodaled}
+\newcommand{\titlefr}{Lorem ipsum dolor sit amet, consectetuer adipiscing elit}
+
+\title{\titleen}
+\author{Camille Noûs}
+\date{December 2025}
+
+%\usepackage{showkeys}
+\linespread{1.2}
+
+\begin{document}
+
+\input{titlepage.tex}
+
+%\clearpage
+%\maketitle
+
+\thispagestyle{plain}
+
+\subsection*{Charte d’intégrité scientifique}
+
+Je déclare avoir respecté, dans la conception et la rédaction de ce mémoire d'HDR, les valeurs et principes d'intégrité scientifique destinés à garantir le caractère honnête et scientifiquement rigoureux de tout travail de recherche, visés à l'article L.211--2 du Code de la recherche et énoncés par la Charte nationale de déontologie des métiers de la recherche et la Charte d'intégrité scientifique de l'Université de Montpellier. Je m'engage à les promouvoir dans le cadre de mes activités futures d'encadrement de recherche.
+
+\vfill
+{\setlength{\parindent}{0pt}
+
+Camille Noûs
+
+\bigskip
+
+\href{mailto:camille.nous@institution.fr}{\tt camille.nous\at{}institution.fr}
+
+\bigskip
+
+Laboratoire Anonyme \\
+Université Anonyme \\
+Adresse supprimée pour évaluation \\
+99999 Ville -- Pays
+}
+\newpage
+
+
+\tableofcontents
+
+
+\mainmatter
+\input{Chap_introduction.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{Chap_One.tex}
+\input{Chap_Two.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Chap_conclusion.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\appendix
+\renewcommand*\thesection{\thechapter.\arabic{section}}
+\pagenumbering{arabic}% resets `page` counter to 1
+\renewcommand*{\thepage}{A\arabic{page}}
+
+\input{appendix.tex}
+
+\bibliographystyle{plain}
+\bibliography{biblio}
+
+\end{document}
+
+

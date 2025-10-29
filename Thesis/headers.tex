@@ -1,0 +1,176 @@
+\usepackage[a4paper,hmargin=30mm,vmargin=30mm]{geometry}
+
+\usepackage[utf8]{inputenc}
+
+%\usepackage{lmodern}
+%\usepackage{helvet}
+%\renewcommand{\familydefault}{\sfdefault}
+\usepackage[sfdefault, light]{FiraSans} %% option 'sfdefault' activates Fira Sans as the default text font
+\renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
+
+\usepackage[T1]{fontenc}
+
+\usepackage[french, english]{babel}
+\usepackage{microtype}
+
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{epigraph}
+\usepackage{tabularx}
+
+\usepackage{hyperref}
+\hypersetup{linktocpage, colorlinks=true, linkcolor=gray, urlcolor=linkcol, citecolor=gray}
+\usepackage{xurl}
+
+\RequirePackage{xcolor}
+\definecolor{astral}{RGB}{46,116,181}
+\definecolor{linkcol}{RGB}{0,118,155}
+\definecolor{gray75}{gray}{0.75}
+\definecolor{myblue}{RGB}{0,82,155}
+\definecolor{um_red}{HTML}{ea4d51}
+\definecolor{um_grey}{HTML}{7292a2}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+\usepackage{nicefrac}
+
+\usepackage{tikz}
+\usetikzlibrary{calc, matrix, arrows,  positioning, fit, backgrounds, shapes, shapes.geometric, decorations.markings}
+\usepackage{tikz-3dplot}
+
+\usepackage{minted}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{etoolbox}
+
+\usepackage{enumitem}
+\usepackage{tocvsec2}
+\usepackage[nottoc]{tocbibind}
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]%
+  {\normalfont\bfseries\color{astral}}
+  {\filleft%
+    \begin{tikzpicture}
+    \node[
+      outer sep=0pt,
+      text width=2.5cm,
+      minimum height=3cm,
+      fill=astral,
+      font=\color{white}\fontsize{80}{90}\selectfont,
+      align=center
+      ] (num) {\thechapter};
+    \node[
+      rotate=90,
+      anchor=south,
+      font=\color{black}\Large\normalfont
+      ] at ([xshift=-5pt]num.west) {\textls[180]{\textsc{\small \chaptertitlename}}};  
+    \end{tikzpicture}%
+  }
+  {10pt}
+  {\titlerule[2.5pt]\vskip3pt\titlerule\vskip4pt\LARGE\sffamily}
+  
+
+  
+\usepackage[titles]{tocloft}
+\renewcommand{\cftchapfont}{\color{astral}\bfseries\sffamily}
+\renewcommand{\cftsecfont}{\sffamily}
+\renewcommand{\cftsubsecfont}{\sffamily}
+
+\renewcommand{\emph}[1]{{\fontseries{m}\selectfont #1}}
+%\renewcommand*{\descriptionlabel}[1]{\color{astral}\hspace\labelsep\sffamily #1}
+\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}{\fontseries{m}\selectfont #1}}
+\titleformat{\paragraph}[runin]%
+  {\normalfont\fontseries{m}\selectfont}%
+  {\theparagraph}%
+  {1em}%
+  {}%
+  
+\usepackage{fancyhdr}
+\newcommand{\chaptermarkNoStar}[1]{\markboth{\textsc{\small \thechapter.\ #1}}{}}
+\newcommand{\chaptermarkStar}[1]{\markboth{\textsc{\small #1}}{}}
+\renewcommand{\chaptermark}[1]{\ifthenelse{\equal{#1}{*}}%
+  {\chaptermarkStar}%
+  {\chaptermarkNoStar{#1}}%
+}
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    \fancyhead{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RO,LE]{\textsl{\small \leftmark}}  % Small caps page number
+\fancyfoot[C]{\thepage}
+
+\usepackage{scalerel}
+\providecommand{\MM}{\ensuremath\mathcal{M}}
+\providecommand{\M}{\ensuremath\mathcal{M}}
+\providecommand{\FF}{\ensuremath\mathcal{F}}
+\providecommand{\Scal}{\mathcal{S}}
+\providecommand{\HH}{\ensuremath\mathcal{H}}
+\providecommand{\R}{\ensuremath\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\bzeta}{\boldsymbol{\zeta}}
+\newcommand{\p}{\boldsymbol{p}}
+\newcommand{\f}{\boldsymbol{f}}
+\newcommand{\x}{\boldsymbol{x}}
+\newcommand{\h}{\boldsymbol{h}}
+\newcommand{\bv}{\boldsymbol{v}}
+\newcommand{\bC}{\boldsymbol{C}}
+
+\newcommand{\PT}{\operatorname{P}}
+\newcommand{\Jac}{\operatorname{J}}
+\newcommand{\Exp}{\operatorname{Exp}}
+\newcommand{\gam}[1]{\gamma\left(#1\right)}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\bell}{\boldsymbol{\ell}}
+\newcommand{\bk}{\boldsymbol{k}}
+\newcommand{\by}{\boldsymbol{y}}
+\newcommand{\bc}{\boldsymbol{c}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+\newcommand{\bd}{\boldsymbol{d}}
+\newcommand{\bD}{\boldsymbol{D}}
+\newcommand{\bigast}{\mathop{\scalerel*{\ast}{\sum}}\limits}
+
+\newcommand{\sabs}[1]{\lvert #1 \rvert}
+\newcommand{\snorm}[1]{\lVert #1 \rVert}
+\newcommand{\sprs}[1]{\langle #1 \rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\prs}[1]{\left\langle #1 \right\rangle}
+\newcommand{\babs}[1]{\bigg\lvert #1 \bigg\rvert}
+\newcommand{\bsnorm}[1]{\bigg\lVert #1 \bigg\rVert}
+\newcommand{\bprs}[1]{\bigg\langle #1 \bigg\rangle}
+
+\newcommand{\ffff}[1]{\llbracket #1 \rrbracket}
+\newcommand{\ooff}[1]{\rrbracket #1 \rrbracket}
+\newcommand{\ffoo}[1]{\llbracket #1 \llbracket}
+\newcommand{\oooo}[1]{\rrbracket #1 \llbracket}
+
+\newcommand\rst[2]{{#1}_{\restriction_{#2}}}
+
+\providecommand{\BigO}[1]{\operatorname{O}\bigl(#1\bigr)}
+\providecommand{\smallO}[1]{\operatorname{o}\bigl(#1\bigr)}
+
+\newtheorem{theorem}{Theorem}
+
+% Nice refs as citations
+\usepackage[nosort]{cleveref}
+\crefname{subsection}{}{} % Remove singular keyword
+\crefname{appendix}{}{} % Remove singular keyword
+\crefname{enumi}{}{} % Remove singular capitalized keyword
+\crefmultiformat{enumi}{#2#1#3}{, #2#1#3}{, #2#1#3}{, #2#1#3} %remove "and" and separators in cleveref lists
+\newcommand\refcite[1]{[\cref{#1}]}
+
+% Dummy fill
+\usepackage{lipsum}
